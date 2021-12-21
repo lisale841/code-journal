@@ -25,12 +25,12 @@ label {
 }
 
 .title-style {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 14px;
+  margin-top: 14px;
 }
 
 .title-box {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   margin-top: 10px;
 }
 
@@ -47,7 +47,7 @@ input {
 
 textarea {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 14px;
   border: solid lightgray 2px;
   border-radius: 3px;
 }
