@@ -24,11 +24,10 @@ function submitForm(event) {
   };
 
   data.nextEntryId++;
-  data.entries.unshift(formValues);
+  data.entries.push(formValues);
   $formCode.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  localStorage.setItem('code-journal-entry-form', JSON.stringify(data));
 }
 
 $formCode.addEventListener('submit', submitForm);
