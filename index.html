@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -33,7 +36,6 @@
           </div>
         </div>
       </div>
-
       <div data-view="entry-form">
         <form class="form-code">
           <div class="row">
@@ -48,17 +50,17 @@
               </div>
               <div class="title-box-input"></div>
               <input required name="title" type="text" id="title-text" />
-              <div class="image-box">
+              <div class="image-box title-style">
                 <label for="image-text">Photo URL</label>
               </div>
               <div class="image-input">
                 <input required name="image-input" type="text" id="image-text" />
               </div>
             </div>
-
             <div class="column-full">
-              <div class="title-notes">
+              <div class="title-notes title-style">
                 <label for="notes-text">Notes</label>
+                <br />
                 <textarea required rows="8" id="notes-text" name="notes"></textarea>
               </div>
               <div>
@@ -70,11 +72,7 @@
       </div>
     </main>
   </div>
-
-
-
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
-
 </html>
