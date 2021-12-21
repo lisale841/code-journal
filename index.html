@@ -1,25 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-  <header>
+  <header class="heading">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h1>Code Journal</h1>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
-  </main>
+  <div class="container">
+    <main>
+      <div class="row">
+        <div class="column-full">
+          <div class="top-header">
+            <h2>New Entry</h2>
+          </div>
+        </div>
+      </div>
+
+      <div data-view="entry-form">
+        <form class="form-code">
+          <div class="row">
+            <div class="column-half">
+              <div class="uploaded-image">
+                <img src="images/placeholder-image-square.jpg" alt="placeholder">
+              </div>
+            </div>
+            <div class="column-half">
+              <div class="title-box">
+                <label for="title-text">Title</label>
+              </div>
+              <div class="title-box-input"></div>
+              <input required name="title" type="text" id="title-text" />
+              <div class="image-box">
+                <label for="image-text">Photo URL</label>
+              </div>
+              <div class="image-input">
+                <input required name="image-input" type="text" id="image-text" />
+              </div>
+            </div>
+
+            <div class="column-full">
+              <div class="title-notes">
+                <label for="notes-text">Notes</label>
+                <textarea required rows="8" id="notes-text" name="notes"></textarea>
+              </div>
+              <div>
+              </div>
+              <button type="submit">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
