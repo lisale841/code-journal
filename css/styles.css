@@ -3,21 +3,33 @@ body {
   font-family: Quicksand, sans-serif;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.entry-list .entry-text {
+  padding-left: 25px;
+}
+
 .heading {
   color: white;
   font-size: 10px;
   background-color: #562b81;
 }
 
-button {
+.button {
   color: white;
   background-color: #562b81;
   border: none;
-  float: right;
   font-size: small;
   padding: 5px 14px;
   border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+.save-btn { float: right; }
 
 label {
   font-size: 15px;
@@ -61,4 +73,23 @@ textarea:focus {
 h1 {
   font-weight: 100;
   font-size: 14px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar .nav-item {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-header .new-btn {
+  align-self: center;
 }

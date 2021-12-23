@@ -17,7 +17,6 @@ if (previousdataJSON !== null) {
 function before(event) {
   var dataJSON = JSON.stringify(data);
   localStorage.setItem('code-journal-entry-form', dataJSON);
-
 }
 
 window.addEventListener('beforeunload', before);
