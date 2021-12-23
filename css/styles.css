@@ -93,3 +93,7 @@ h1 {
 .top-header .new-btn {
   align-self: center;
 }
+
+.no-entries {
+  text-align: center;
+}

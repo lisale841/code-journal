@@ -4,7 +4,7 @@ var $titleBoxInput = document.getElementById('title-text');
 var $imageInput = document.getElementById('image-text');
 var $notesText = document.getElementById('notes-text');
 var $image = document.querySelector('img');
-var $noEntries = document.getElementById('no-entries');
+var $noEntries = document.querySelector('.no-entries');
 var $view = document.querySelectorAll('.view');
 var $entryFormbutton = document.getElementById('create-entry-btn');
 var $navBar = document.querySelector('.nav-bar');
@@ -91,18 +91,21 @@ function entriesClick(event) {
     }
     data.view = viewer;
   }
+  if (data.entries.length > 0) {
+    $noEntries.className = 'no-entries hidden';
+
+  }
 }
 
 $navBar.addEventListener('click', entriesClick);
 $entryFormbutton.addEventListener('click', entriesClick);
 
 function createEntryList(entries) {
-  if (entries.length > 0) {
-    $noEntries.remove();
-  }
-  for (var i = 0; i <= entries.length - 1; i++) {
+
+  for (var i = 0; i <= data.entries.length - 1; i++) {
     var entry = dataEntry(entries[i]);
     $ul.appendChild(entry);
+
   }
 }
 
