@@ -36,7 +36,7 @@ function submitForm(event) {
   var $entry = dataEntry(formValues);
   $ul.prepend($entry);
 
-  entriesClick(event);
+  swapViews(event);
 }
 
 $formCode.addEventListener('submit', submitForm);
@@ -71,7 +71,7 @@ function dataEntry(entry) {
   return $li;
 }
 
-function entriesClick(event) {
+function swapViews(event) {
   var viewer;
 
   if (event) {
@@ -97,8 +97,8 @@ function entriesClick(event) {
   }
 }
 
-$navBar.addEventListener('click', entriesClick);
-$entryFormbutton.addEventListener('click', entriesClick);
+$navBar.addEventListener('click', swapViews);
+$entryFormbutton.addEventListener('click', swapViews);
 
 function createEntryList(entries) {
 
@@ -111,6 +111,6 @@ function createEntryList(entries) {
 
 function loadEntryList(event) {
   createEntryList(data.entries);
-  entriesClick();
+  swapViews();
 }
 window.addEventListener('DOMContentLoaded', loadEntryList);
