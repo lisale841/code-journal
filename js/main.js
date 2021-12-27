@@ -9,6 +9,7 @@ var $view = document.querySelectorAll('.view');
 var $entryFormbutton = document.getElementById('create-entry-btn');
 var $navBar = document.querySelector('.nav-bar');
 var $ul = document.querySelector('.entry-list');
+var $titleEntryForm = document.querySelector('.title-entry-form');
 
 function updateImage(event) {
   var insideText = $imageInput.value;
@@ -28,13 +29,29 @@ function submitForm(event) {
     id: data.nextEntryId
   };
 
-  data.nextEntryId++;
-  data.entries.unshift(formValues);
+  if (data.editing !== null) {
+
+    for (var i = 0; i <= data.entries.length - 1; i++) {
+      if (data.editing === data.entries[i].id + '') {
+        data.entries[i].imageUrl = $imageInput.value;
+        data.entries[i].title = $titleBoxInput.value;
+        data.entries[i].notes = $notesText.value;
+
+        var $entry = dataEntry(data.entries[i]);
+        $ul.children[i].replaceWith($entry);
+        data.editing = null;
+      }
+    }
+
+  } else {
+    data.nextEntryId++;
+    data.entries.unshift(formValues);
+    $entry = dataEntry(formValues);
+    $ul.prepend($entry);
+  }
+
   $formCode.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-
-  var $entry = dataEntry(formValues);
-  $ul.prepend($entry);
 
   swapViews(event);
 }
@@ -57,18 +74,29 @@ function dataEntry(entry) {
   $imageColumn.appendChild($imageView);
 
   var $textColumn = document.createElement('div');
-  $textColumn.setAttribute('class', 'column-half entry-text');
+  $textColumn.setAttribute('class', 'column-half');
   $row.appendChild($textColumn);
+
+  var $entryText = document.createElement('div');
+  $entryText.setAttribute('class', 'entry-text');
+  $textColumn.appendChild($entryText);
 
   var $titleText = document.createElement('h2');
   $titleText.textContent = entry.title;
-  $textColumn.appendChild($titleText);
+  $entryText.appendChild($titleText);
+
+  var $editBtn = document.createElement('i');
+  $editBtn.setAttribute('data-view', 'entry-form');
+  $editBtn.setAttribute('data-entry-id', entry.id);
+  $editBtn.setAttribute('class', 'fas fa-pencil-alt');
+  $entryText.appendChild($editBtn);
 
   var $notesText = document.createElement('p');
   $notesText.textContent = entry.notes;
   $textColumn.appendChild($notesText);
 
   return $li;
+
 }
 
 function swapViews(event) {
@@ -85,6 +113,7 @@ function swapViews(event) {
     for (var i = 0; i < $view.length; i++) {
       if ($view[i].getAttribute('data-view') === viewer) {
         $view[i].className = 'view';
+
       } else {
         $view[i].className = 'view hidden';
       }
@@ -98,19 +127,65 @@ function swapViews(event) {
 }
 
 $navBar.addEventListener('click', swapViews);
-$entryFormbutton.addEventListener('click', swapViews);
+$entryFormbutton.addEventListener('click', newEntry);
+
+function newEntry(event) {
+  $titleEntryForm.textContent = 'New Entry';
+  data.editing = null;
+  $formCode.reset();
+  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+  swapViews(event);
+}
 
 function createEntryList(entries) {
-
-  for (var i = 0; i <= data.entries.length - 1; i++) {
+  for (var i = 0; i <= entries.length - 1; i++) {
     var entry = dataEntry(entries[i]);
     $ul.appendChild(entry);
+  }
+}
 
+function prepopulateEntryForm(entries) {
+
+  if (data.editing) {
+    $titleEntryForm.textContent = 'Edit Entry';
+    for (var i = 0; i <= data.entries.length - 1; i++) {
+
+      if (data.entries[i].id + '' === data.editing) {
+        $imageInput.value = data.entries[i].imageUrl;
+        $image.setAttribute('src', data.entries[i].imageUrl);
+        $titleBoxInput.value = data.entries[i].title;
+        $notesText.value = data.entries[i].notes;
+
+      }
+    }
   }
 }
 
 function loadEntryList(event) {
   createEntryList(data.entries);
   swapViews();
+  prepopulateEntryForm(data.entries);
+
 }
 window.addEventListener('DOMContentLoaded', loadEntryList);
+
+function editButton(event) {
+  var entryId = event.target.getAttribute('data-entry-id');
+  $titleEntryForm.textContent = 'Edit Entry';
+  if (entryId) {
+    for (var i = 0; i <= data.entries.length - 1; i++) {
+
+      if (data.entries[i].id + '' === entryId) {
+        $imageInput.value = data.entries[i].imageUrl;
+        $image.setAttribute('src', data.entries[i].imageUrl);
+        $titleBoxInput.value = data.entries[i].title;
+        $notesText.value = data.entries[i].notes;
+        data.editing = entryId;
+      }
+    }
+    swapViews(event);
+
+  }
+}
+
+$ul.addEventListener('click', editButton);
