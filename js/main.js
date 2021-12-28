@@ -10,6 +10,7 @@ var $entryFormbutton = document.getElementById('create-entry-btn');
 var $navBar = document.querySelector('.nav-bar');
 var $ul = document.querySelector('.entry-list');
 var $titleEntryForm = document.querySelector('.title-entry-form');
+var $deleteEntryBtn = document.querySelector('.delete-entry-btn');
 
 function updateImage(event) {
   var insideText = $imageInput.value;
@@ -47,11 +48,13 @@ function submitForm(event) {
     data.nextEntryId++;
     data.entries.unshift(formValues);
     $entry = dataEntry(formValues);
+
     $ul.prepend($entry);
   }
 
   $formCode.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
 
   swapViews(event);
 }
@@ -131,6 +134,7 @@ $entryFormbutton.addEventListener('click', newEntry);
 
 function newEntry(event) {
   $titleEntryForm.textContent = 'New Entry';
+  $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
   data.editing = null;
   $formCode.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -172,6 +176,7 @@ window.addEventListener('DOMContentLoaded', loadEntryList);
 function editButton(event) {
   var entryId = event.target.getAttribute('data-entry-id');
   $titleEntryForm.textContent = 'Edit Entry';
+
   if (entryId) {
     for (var i = 0; i <= data.entries.length - 1; i++) {
 
@@ -189,3 +194,4 @@ function editButton(event) {
 }
 
 $ul.addEventListener('click', editButton);
+$deleteEntryBtn.addEventListener('click', editButton);
