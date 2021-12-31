@@ -116,3 +116,58 @@ h1 {
 .no-entries {
   text-align: center;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.open {
+  display: block;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 4px;
+  text-align: center;
+  padding-bottom: 56px;
+  padding-top: 56px;
+}
+
+.modal-button-confirm {
+  background-color: red;
+  cursor: pointer;
+  border: none;
+  padding: 6px;
+  padding-right: 18px;
+  padding-left: 18px;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  float: right;
+}
+
+.modal-button-cancel {
+  background-color: grey;
+  cursor: pointer;
+  border: none;
+  padding: 6px;
+  padding-right: 18px;
+  padding-left: 18px;
+  color: black;
+  font-size: 16px;
+  border-radius: 4px;
+  float: left;
+}

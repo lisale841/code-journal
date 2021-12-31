@@ -11,6 +11,9 @@ var $navBar = document.querySelector('.nav-bar');
 var $ul = document.querySelector('.entry-list');
 var $titleEntryForm = document.querySelector('.title-entry-form');
 var $deleteEntryBtn = document.querySelector('.delete-entry-btn');
+var $modalCancelButton = document.querySelector('.modal-button-cancel');
+// var $modalConfirmButton = document.querySelector('.modal-button-confirm');
+var $modal = document.querySelector('.modal');
 
 function updateImage(event) {
   var insideText = $imageInput.value;
@@ -57,6 +60,7 @@ function submitForm(event) {
   $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
 
   swapViews(event);
+  // console.log(event);
 }
 
 $formCode.addEventListener('submit', submitForm);
@@ -127,6 +131,7 @@ function swapViews(event) {
     $noEntries.className = 'no-entries hidden';
 
   }
+
 }
 
 $navBar.addEventListener('click', swapViews);
@@ -134,8 +139,8 @@ $entryFormbutton.addEventListener('click', newEntry);
 
 function newEntry(event) {
   $titleEntryForm.textContent = 'New Entry';
-  $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
   data.editing = null;
+  $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
   $formCode.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   swapViews(event);
@@ -152,6 +157,7 @@ function prepopulateEntryForm(entries) {
 
   if (data.editing) {
     $titleEntryForm.textContent = 'Edit Entry';
+    $deleteEntryBtn.setAttribute('class', 'delete-entry-btn');
     for (var i = 0; i <= data.entries.length - 1; i++) {
 
       if (data.entries[i].id + '' === data.editing) {
@@ -159,7 +165,6 @@ function prepopulateEntryForm(entries) {
         $image.setAttribute('src', data.entries[i].imageUrl);
         $titleBoxInput.value = data.entries[i].title;
         $notesText.value = data.entries[i].notes;
-
       }
     }
   }
@@ -176,6 +181,7 @@ window.addEventListener('DOMContentLoaded', loadEntryList);
 function editButton(event) {
   var entryId = event.target.getAttribute('data-entry-id');
   $titleEntryForm.textContent = 'Edit Entry';
+  $deleteEntryBtn.setAttribute('class', 'delete-entry-btn');
 
   if (entryId) {
     for (var i = 0; i <= data.entries.length - 1; i++) {
@@ -192,6 +198,18 @@ function editButton(event) {
 
   }
 }
-
 $ul.addEventListener('click', editButton);
-$deleteEntryBtn.addEventListener('click', editButton);
+
+function openModal(event) {
+  // console.log(event.target);
+  $modal.className = 'modal open';
+}
+
+function closedModal(event) {
+  // console.log(event.target);
+  $modal.className = 'modal';
+}
+
+// $modalConfirmButton.addEventListener('click', deleteEntry);
+$deleteEntryBtn.addEventListener('click', openModal);
+$modalCancelButton.addEventListener('click', closedModal);
