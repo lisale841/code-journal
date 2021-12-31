@@ -12,7 +12,7 @@ var $ul = document.querySelector('.entry-list');
 var $titleEntryForm = document.querySelector('.title-entry-form');
 var $deleteEntryBtn = document.querySelector('.delete-entry-btn');
 var $modalCancelButton = document.querySelector('.modal-button-cancel');
-// var $modalConfirmButton = document.querySelector('.modal-button-confirm');
+var $modalConfirmButton = document.querySelector('.modal-button-confirm');
 var $modal = document.querySelector('.modal');
 
 function updateImage(event) {
@@ -60,7 +60,7 @@ function submitForm(event) {
   $deleteEntryBtn.setAttribute('class', 'delete-entry-btn hidden');
 
   swapViews(event);
-  // console.log(event);
+
 }
 
 $formCode.addEventListener('submit', submitForm);
@@ -201,15 +201,32 @@ function editButton(event) {
 $ul.addEventListener('click', editButton);
 
 function openModal(event) {
-  // console.log(event.target);
+
   $modal.className = 'modal open';
+  swapViews(event);
 }
 
 function closedModal(event) {
-  // console.log(event.target);
+
   $modal.className = 'modal';
 }
 
-// $modalConfirmButton.addEventListener('click', deleteEntry);
+function deleteEntry(event) {
+
+  if (data.editing !== null) {
+
+    for (var i = 0; i <= data.entries.length - 1; i++) {
+      if (data.editing === data.entries[i].id + '') {
+
+        data.entries.splice(i, 1);
+        $ul.children[i].remove();
+        data.editing = null;
+      }
+    }
+    swapViews(event);
+  }
+}
+
+$modalConfirmButton.addEventListener('click', deleteEntry);
 $deleteEntryBtn.addEventListener('click', openModal);
 $modalCancelButton.addEventListener('click', closedModal);
